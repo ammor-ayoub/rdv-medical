@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\DoctorProfileRepository;
+use App\Repository\DoctorRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DoctorProfileRepository::class)]
-class DoctorProfile
+#[ORM\Entity(repositoryClass: DoctorRepository::class)]
+class Doctor
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,10 +16,10 @@ class DoctorProfile
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $doctor = null;
+    private User $compte;
 
     #[ORM\Column(length: 100)]
-    private ?string $speciality = null;
+    private string $speciality;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -29,19 +29,19 @@ class DoctorProfile
         return $this->id;
     }
 
-    public function getDoctor(): ?User
+    public function getCompte(): User
     {
-        return $this->doctor;
+        return $this->compte;
     }
 
-    public function setDoctor(User $doctor): static
+    public function setCompte(User $compte): static
     {
-        $this->doctor = $doctor;
+        $this->compte = $compte;
 
         return $this;
     }
 
-    public function getSpeciality(): ?string
+    public function getSpeciality(): string
     {
         return $this->speciality;
     }

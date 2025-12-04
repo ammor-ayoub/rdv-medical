@@ -12,15 +12,15 @@ class Appointement
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $doctor = null;
+    private Doctor $doctor;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $patient = null;
+    private Patient $patient;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTime $startTime = null;
@@ -39,24 +39,24 @@ class Appointement
         return $this->id;
     }
 
-    public function getDoctor(): ?User
+    public function getDoctor(): Doctor
     {
         return $this->doctor;
     }
 
-    public function setDoctor(?User $doctor): static
+    public function setDoctor(Doctor $doctor): static
     {
         $this->doctor = $doctor;
 
         return $this;
     }
 
-    public function getPatient(): ?User
+    public function getPatient(): Patient
     {
         return $this->patient;
     }
 
-    public function setPatient(?User $patient): static
+    public function setPatient(Patient $patient): static
     {
         $this->patient = $patient;
 

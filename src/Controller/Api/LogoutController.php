@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,9 +11,6 @@ final class LogoutController extends AbstractController
     #[Route('/api/logout', name: 'app_logout')]
     public function index(): JsonResponse
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/LogoutController.php',
-        ]);
+        throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }
 }

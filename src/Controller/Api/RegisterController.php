@@ -1,11 +1,12 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,7 +18,7 @@ class RegisterController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
         if (!isset($data['email']) || !isset($data['password'])) {
-            return $this->json(['error' => 'Missing email or password'], 400);
+            return $this->json(['error' => 'Missing email or password'], Response::HTTP_BAD_REQUEST);
         }
 
         $user = new User();
@@ -32,6 +33,6 @@ class RegisterController extends AbstractController
         $em->persist($user);
         $em->flush();
 
-        return $this->json(['message' => 'User created'], 201);
+        return $this->json(['message' => 'User created'], Response::HTTP_CREATED);
     }
 }
